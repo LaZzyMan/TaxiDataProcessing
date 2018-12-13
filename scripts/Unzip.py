@@ -42,4 +42,4 @@ def un_tar_gz(file_name):
 
 
 if __name__ == '__main__':
-    un_tar_gz('gnuplot-5.2.5.tar.gz')
+    un_tar_gz('gnuplot.tar.gz')
