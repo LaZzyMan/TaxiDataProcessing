@@ -15,7 +15,7 @@ if __name__ == '__main__':
                      password='solokas')
     for year in y_list:
         ssh.connect()
-        ssh.upload_file(local_file='/Users/zz/PycharmProjects/TaxiDataProcessing/%s.py' % year,
+        ssh.upload_file(local_file='/Users/zz/PycharmProjects/TaxiDataProcessing/scripts/%s.py' % year,
                         remote_path='/var/data/%s.py' % year)
         ssh.exec_cmd('python /var/data/%s.py' % year)
         print('Script Executed :)')
