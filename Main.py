@@ -13,6 +13,13 @@ if __name__ == '__main__':
     ssh = SSHConnect(host='urbancolab.com',
                      username='root',
                      password='solokas')
+    ssh.upload_file(local_file='/Users/zz/PycharmProjects/TaxiDataProcessing/scripts/SpatialUnit.py',
+                    remote_path='/var/data/SpatialUnit.py')
+    ssh.upload_file(local_file='/Users/zz/PycharmProjects/TaxiDataProcessing/scripts/DBOperation.py',
+                    remote_path='/var/data/DBOperation.py')
+    ssh.upload_file(local_file='/Users/zz/PycharmProjects/TaxiDataProcessing/scripts/Unzip.py',
+                    remote_path='/var/data/Unzip.py')
+    print('Tools Scripts Uploaded :)')
     for year in y_list:
         ssh.connect()
         ssh.upload_file(local_file='/Users/zz/PycharmProjects/TaxiDataProcessing/scripts/%s.py' % year,
@@ -22,3 +29,7 @@ if __name__ == '__main__':
         ssh.exec_cmd('rm /var/data/%s.py' % year)
         print('Script Removed :)')
         ssh.close()
+    ssh.exec_cmd('rm /var/data/SpatialUnit.py')
+    ssh.exec_cmd('rm /var/data/DBOperation.py')
+    ssh.exec_cmd('rm /var/data/Unzip.py')
+    print('Tools Scripts Removed :)')
