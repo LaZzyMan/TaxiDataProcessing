@@ -14,6 +14,7 @@ def un_zip(file_name):
     for names in zip_file.namelist():
         zip_file.extract(names, folder_name + '/')
     zip_file.close()
+    return folder_name
 
 
 def un_gz(file_name):
@@ -34,11 +35,12 @@ def un_tar(file_name):
     for name in names:
         tar.extract(name, folder_name + '/')
     tar.close()
+    return folder_name
 
 
 def un_tar_gz(file_name):
     un_gz(file_name)
-    un_tar(file_name.replace('.gz', ''))
+    return un_tar(file_name.replace('.gz', ''))
 
 
 if __name__ == '__main__':
