@@ -78,11 +78,18 @@ if __name__ == '__main__':
     # detect trajectories for cabs
     # cabs = {'cab_id': [ weight, from_unit ]}
     print('Detecting ODs...')
+    num_lines = sum(1 for _ in fp_year)
+    fp_year.seek(0)
     cabs = {}
     ods = []
     num_error_on = 0
     num_error_off = 0
+    count = 0
     for line in (i.decode().strip().split(',') for i in fp_year):
+        # Display process
+        if count % 10000 == 0:
+            print('%d / %d' % (count, num_lines))
+        count = count + 1
         cab_id = line[0]
         timestamp = int(line[1])
         weight = int(line[6])
