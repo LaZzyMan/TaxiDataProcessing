@@ -40,7 +40,9 @@ def un_tar(file_name):
 
 def un_tar_gz(file_name):
     un_gz(file_name)
-    return un_tar(file_name.replace('.gz', ''))
+    folder_name = un_tar(file_name.replace('.gz', ''))
+    os.remove(file_name.replace('.gz', ''))
+    return folder_name
 
 
 def decompress(file_name):

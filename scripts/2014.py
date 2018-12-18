@@ -45,7 +45,7 @@ if __name__ == '__main__':
     total_num_error_on = 0
     total_num_error_off = 0
     for day in DATES:
-        print(day + 'running...')
+        print(day + ' running...')
         with open(data_path + day + '.csv', 'rb') as fp:
             # get total number of lines
             num_lines = sum(1 for x in fp)

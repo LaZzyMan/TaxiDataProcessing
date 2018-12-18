@@ -57,7 +57,7 @@ if __name__ == '__main__':
     for day in dates:
         # unzip and data format transform
         # generate daily data
-        print(day + 'running...')
+        print(day + ' running...')
         if os.path.exists(DATA_PATH + '/TaxiData/2016/' + day):
             shutil.rmtree(DATA_PATH + '/TaxiData/2016/' + day)
         print('Unzip file...')
