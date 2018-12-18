@@ -64,6 +64,7 @@ if __name__ == '__main__':
         with open(Unzip.un_zip(DATA_PATH + '/TaxiData/2016/' + day + '.zip') + '/' + day + '.txt', 'r') as fp:
             # detect trajectories for cabs
             num_lines = sum(1 for _ in fp)
+            # num_lines = 0
             fp.seek(0)
             count = 0
             num_error_on = 0
@@ -79,7 +80,7 @@ if __name__ == '__main__':
                 cab = line[0]
                 if current_cab == cab:
                     # cab has not changed
-                    state = line[12].split(',')[4] == '重车'
+                    state = '重车' in line[12]
                     if state is current_state:
                         # state has not changed
                         continue
@@ -121,7 +122,7 @@ if __name__ == '__main__':
                         # current track unfinished
                         track_list[current_cab] = current_from_unit
                     current_cab = cab
-                    current_state = line[12].split(',')[4] == '重车'
+                    current_state = '重车' in line[12]
                     if current_state:
                         # new car initial state is 1
                         if current_cab in track_list.keys():
