@@ -43,5 +43,10 @@ def un_tar_gz(file_name):
     return un_tar(file_name.replace('.gz', ''))
 
 
+def decompress(file_name):
+    os.system('java -jar Decompress.jar ' + file_name)
+    return file_name.replace('.tar.gz', '')
+
+
 if __name__ == '__main__':
     un_tar_gz('gnuplot.tar.gz')
