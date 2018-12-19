@@ -1,5 +1,6 @@
 import requests
 import time
+import os
 
 
 class OpenTSDB:
@@ -72,6 +73,13 @@ class OpenTSDB:
                               'queries': [query.query_json for query in queries]
                           })
         return r.json()
+
+    def delete(self, start_date, end_date, metric):
+        os.system('sudo /home/ucl/DNT/opentsdb/build/tsdb tsd --delete %s %s %s'
+                  % (time.strftime('%Y/%m/%d-%H%:%M:%S', start_date),
+                     time.strftime('%Y/%m/%d-%H%:%M:%S', end_date),
+                     metric))
+        return
 
 
 class Query:
