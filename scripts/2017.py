@@ -76,7 +76,7 @@ if __name__ == '__main__':
             for line in (i.strip().split('\t') for i in fp):
                 # Display process
                 if count % 10000 == 0:
-                    print('%d / %d' % (count, num_lines))
+                    print('%d / %d, ods number: %d' % (count, num_lines, len(ods)))
                 count += 1
                 cab = line[0]
                 if current_cab == cab:
@@ -88,6 +88,7 @@ if __name__ == '__main__':
                     elif state:
                         # state has changed
                         # 0->1
+                        current_state = state
                         lon = float(line[5][:3] + '.' + line[5][3:])
                         lat = float(line[4][:2] + '.' + line[4][2:])
                         current_from_unit = su.find_unit_by_point(lon, lat)
@@ -96,6 +97,7 @@ if __name__ == '__main__':
                             num_error_on += 1
                     else:
                         # 1->0
+                        current_state = state
                         if current_from_unit == -1:
                             # board point out of range
                             continue
@@ -150,6 +152,6 @@ if __name__ == '__main__':
         total_num_od += len(ods)
     print('Finished! Time Usage: ' + str(time.time() - start))
     print('Correct: %d.' % total_num_od)
-    print('Boarding out og range: %d.' % total_num_error_on)
-    print('Boarding out og range: %d.' % total_num_error_off)
+    print('Boarding out of range: %d.' % total_num_error_on)
+    print('Boarding out of range: %d.' % total_num_error_off)
 

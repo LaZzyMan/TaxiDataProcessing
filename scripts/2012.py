@@ -94,5 +94,5 @@ if __name__ == '__main__':
             fp.close()
         print('Finished! Time Usage: ' + str(time.time() - start))
         print('Correct: %d.' % total_num_od)
-        print('Boarding out og range: %d.' % total_num_error_on)
-        print('Boarding out og range: %d.' % total_num_error_off)
+        print('Boarding out of range: %d.' % total_num_error_on)
+        print('Boarding out of range: %d.' % total_num_error_off)

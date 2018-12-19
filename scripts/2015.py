@@ -24,8 +24,6 @@ try:
     from . import DBOperation
 except ImportError:
     import DBOperation
-import os
-import shutil
 import time
 
 DATA_PATH = ''
@@ -50,7 +48,6 @@ if __name__ == '__main__':
     total_num_error_off = 0
     # to track cabs between two days
     track_list = {}
-    ods = []
     for day in dates:
         # unzip and data format transform
         # generate daily data
@@ -66,10 +63,11 @@ if __name__ == '__main__':
             current_cab = ''
             current_state = False
             current_from_unit = 0
+            ods = []
             for line in (i.strip().split('|') for i in fp):
                 # Display process
                 if count % 10000 == 0:
-                    print('%d / %d' % (count, num_lines))
+                    print('%d / %d, ods number: %d' % (count, num_lines, len(ods)))
                 count += 1
                 cab = line[0]
                 if current_cab == cab:
@@ -81,6 +79,7 @@ if __name__ == '__main__':
                     elif state:
                         # state has changed
                         # 0->1
+                        current_state = state
                         lon = float(line[4][:3] + '.' + line[4][3:])
                         lat = float(line[3][:2] + '.' + line[3][2:])
                         current_from_unit = su.find_unit_by_point(lon, lat)
@@ -89,6 +88,7 @@ if __name__ == '__main__':
                             num_error_on += 1
                     else:
                         # 1->0
+                        current_state = state
                         if current_from_unit == -1:
                             # board point out of range
                             continue
@@ -142,5 +142,5 @@ if __name__ == '__main__':
         total_num_od += len(ods)
     print('Finished! Time Usage: ' + str(time.time() - start))
     print('Correct: %d.' % total_num_od)
-    print('Boarding out og range: %d.' % total_num_error_on)
-    print('Boarding out og range: %d.' % total_num_error_off)
+    print('Boarding out of range: %d.' % total_num_error_on)
+    print('Boarding out of range: %d.' % total_num_error_off)
